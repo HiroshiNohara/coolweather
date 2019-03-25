@@ -1,5 +1,6 @@
 package com.coolweather.android;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -9,7 +10,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +24,7 @@ import com.coolweather.android.gson.Air;
 import com.coolweather.android.gson.Forecast;
 import com.coolweather.android.gson.Suggestion;
 import com.coolweather.android.gson.Weather;
+import com.coolweather.android.service.AutoUpdateService;
 import com.coolweather.android.util.HttpUtil;
 import com.coolweather.android.util.Utility;
 
@@ -230,10 +231,6 @@ public class WeatherActivity extends AppCompatActivity {
             minText.setText(forecast.min);
             forecastLayout.addView(view);
         }
-
-        //aqiText.setText(aqiTemp);
-        //pm25Text.setText(pm25Temp);
-
         StringBuilder comfort=new StringBuilder();
         StringBuilder carWash=new StringBuilder();
         StringBuilder sport=new StringBuilder();
@@ -253,6 +250,8 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash.toString().trim());
         sportText.setText(sport.toString().trim());
         weatherLayout.setVisibility(View.VISIBLE);
+        Intent intent=new Intent(this, AutoUpdateService.class);
+        startService(intent);
     }
 
     private void showAirInfo(Air air){

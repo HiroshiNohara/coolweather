@@ -17,7 +17,6 @@ import android.support.v4.app.Fragment;
 import com.coolweather.android.db.City;
 import com.coolweather.android.db.County;
 import com.coolweather.android.db.Province;
-import com.coolweather.android.gson.Weather;
 import com.coolweather.android.util.HttpUtil;
 import com.coolweather.android.util.Utility;
 
@@ -76,7 +75,6 @@ public class ChooseAreaFragment extends Fragment {
                     String weatherId=countyList.get(position).getWeatherId();
                     if(getActivity() instanceof MainActivity) {
                         Intent intent = new Intent(getActivity(), WeatherActivity.class);
-                        //intent.putExtra("weather_id",weatherId+" "+cityId);
                         intent.putExtra("weather_id", weatherId);
                         intent.putExtra("air_id",cityId);
                         startActivity(intent);
